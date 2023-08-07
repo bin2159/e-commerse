@@ -1,12 +1,13 @@
 import Container from "react-bootstrap/esm/Container";
 import { Row, Col } from "react-bootstrap";
 import { useContext } from "react";
-import MusicProduct from "../../../context/MusicProduct";
+import MusicContext from "../../../context/MusicContext";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const Music = () => {
-  const musicCtx = useContext(MusicProduct);
+  const musicCtx = useContext(MusicContext);
+  console.log(musicCtx)
   const {
     musicProducts: { items },
   } = musicCtx;

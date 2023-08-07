@@ -1,36 +1,37 @@
-import { useState,createContext } from "react";
-const MusicProduct = createContext({});
+import React, { createContext, useState } from "react";
 
-export const MusicProductProvider = ({ children }) => {
+const CartContext = createContext({});
+
+export const CartContextProvider = ({ children }) => {
   const [item, setItem] = useState([
     {
       title: "Colors",
       price: 100,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+      quantity: 2,
     },
     {
       title: "Black and white Colors",
       price: 50,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+      quantity: 3,
     },
     {
       title: "Yellow and Black Colors",
       price: 70,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+      quantity: 1,
     },
-    {
-      title: "Blue Color",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-    }
-]);
-  const musicProducts = {
+  ]);
+  const cartProducts = {
     items: item,
   };
-  return <MusicProduct.Provider value={{musicProducts}}>{children}</MusicProduct.Provider>;
+  return (
+    <CartContext.Provider value={{ cartProducts }}>{children}</CartContext.Provider>
+  );
 };
-export default MusicProduct;
+
+export default CartContext;

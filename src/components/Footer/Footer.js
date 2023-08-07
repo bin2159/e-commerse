@@ -2,10 +2,10 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <Container className="bg-secondary d-flex " fluid>
-      <Row className=" align-items-center m-auto">
+    <Container className="bg-secondary d-flex justify-content-evenly" fluid>
+      <Row className=" align-items-center  m-auto">
         <Col xs='auto'>
-            <h3 className="text-light text-center">The Generic</h3>
+            <h3 className="text-light text-center h1">The Generic</h3>
         </Col>
         <Col>
             <i className="bi bi-youtube"></i>
