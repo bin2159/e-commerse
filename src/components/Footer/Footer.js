@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <Container className="bg-secondary d-flex justify-content-evenly" fluid>
+    <Container className="bg-secondary d-flex justify-content-evenly position-fixed bottom-0" fluid>
       <Row className=" align-items-center  m-auto">
         <Col xs='auto'>
             <h3 className="text-light text-center h1">The Generic</h3>

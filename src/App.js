@@ -1,21 +1,25 @@
-import { useState } from "react";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Banner from "./components/Main/Banner/Banner";
-import Content from "./components/Main/Content/Content";
+
 import { MusicContextProvider } from "./context/MusicContext";
 import { CartContextProvider } from "./context/CartContext";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Root from "./pages/Root";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import Store from "./pages/Store";
+
+const router=createBrowserRouter([
+  {path:'/',element:<Root/>,children:[
+    {path:'/home',element:<Home/>},
+    {path:'/store',element:<Store/>},
+    {path:'/about',element:<About/>}
+  ]}
+])
 
 function App() {
   return (
     <MusicContextProvider>
       <CartContextProvider>
-        <Header />
-        <main>
-          <Banner />
-          <Content />
-        </main>
-        <Footer />
+        <RouterProvider router={router}/>
       </CartContextProvider>
     </MusicContextProvider>
   );

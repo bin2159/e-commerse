@@ -1,12 +1,13 @@
 import Container from "react-bootstrap/esm/Container";
-import { Row, Col } from "react-bootstrap";
-import { useContext } from "react";
+import { Row, Col} from "react-bootstrap";
+import { useContext, useState } from "react";
 import MusicContext from "../../../context/MusicContext";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CartContext from "../../../context/CartContext";
-
+import Notify from "./Notify";
 const Music = () => {
+  const [toast,setToast]=useState(false)
   const musicCtx = useContext(MusicContext);
   const cartCtx=useContext(CartContext)
   const {
@@ -15,8 +16,10 @@ const Music = () => {
   const {cartProducts:{addItem}}=cartCtx
   const cartHandler=(e)=>{
     addItem(e.target.id)
+    setToast(true)
   }
   return (
+    <>
     <Container>
         <h4 className="display-6 text-center fw-semibold">Music</h4>
       <Row>
@@ -38,6 +41,8 @@ const Music = () => {
         ))}
       </Row>
     </Container>
+    <Notify show={toast} setShow={setToast}/>
+    </>
   );
 };
 
