@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import MusicContext from "./MusicContext";
 
 const CartContext = createContext({});
 
@@ -26,8 +27,28 @@ export const CartContextProvider = ({ children }) => {
       quantity: 1,
     },
   ]);
+  const musicCtx=useContext(MusicContext)
+  const {musicProducts:{items:musicItems}}=musicCtx
+  const addItemHandler=(itemTitle)=>{
+    setItem(prev=>{
+        const duplicateItemIndex=prev.findIndex(prevItem=>prevItem.title===itemTitle)
+        if(duplicateItemIndex!==-1){
+            const updatedItem={...prev[duplicateItemIndex],quantity:Number(prev[duplicateItemIndex].quantity)+1}
+            const newItemList=[...prev]
+            newItemList[duplicateItemIndex]=updatedItem
+            return newItemList
+            
+        }
+        else{
+        const newItem =musicItems.filter(items=>items.title=itemTitle)
+            const newItemList=[...prev,{...newItem,quantity:1}]
+            return newItemList
+        }
+    })
+  }
   const cartProducts = {
     items: item,
+    addItem:addItemHandler
   };
   return (
     <CartContext.Provider value={{ cartProducts }}>{children}</CartContext.Provider>

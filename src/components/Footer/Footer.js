@@ -11,10 +11,10 @@ const Footer = () => {
             <i className="bi bi-youtube"></i>
         </Col>
         <Col>
-        <i class="bi bi-spotify"></i>
+        <i className="bi bi-spotify"></i>
         </Col>
         <Col>
-        <i class="bi bi-facebook"></i>
+        <i className="bi bi-facebook"></i>
         </Col>
       </Row>
     </Container>

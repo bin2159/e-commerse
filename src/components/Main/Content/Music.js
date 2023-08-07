@@ -4,20 +4,24 @@ import { useContext } from "react";
 import MusicContext from "../../../context/MusicContext";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import CartContext from "../../../context/CartContext";
 
 const Music = () => {
   const musicCtx = useContext(MusicContext);
-  console.log(musicCtx)
+  const cartCtx=useContext(CartContext)
   const {
     musicProducts: { items },
   } = musicCtx;
-  console.log(items);
+  const {cartProducts:{addItem}}=cartCtx
+  const cartHandler=(e)=>{
+    addItem(e.target.id)
+  }
   return (
     <Container>
-        <h4 className="display-6 text-center">Music</h4>
+        <h4 className="display-6 text-center fw-semibold">Music</h4>
       <Row>
         {items.map((item) => (
-          <Col md={6}>
+          <Col md={6} key={item.title}>
             <Card style={{ width: "18rem" }} className="mx-auto m-3">
               <Card.Img variant="top" src={item.imageUrl} />
               <Card.Body>
@@ -26,7 +30,7 @@ const Music = () => {
                   ${item.price}
                 </Card.Text>
                 <div className="text-center">
-                    <Button variant="dark">Add to Cart</Button>
+                    <Button id={item.title} variant="dark" onClick={cartHandler}>Add to Cart</Button>
                 </div>
               </Card.Body>
             </Card>

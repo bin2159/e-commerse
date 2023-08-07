@@ -19,7 +19,7 @@ const CartList = () => {
       </Row>
 
       {items.map((item) => (
-        <Row className="align-items-center mb-3 ">
+        <Row className="align-items-center mb-3 " key={item.title}>
           <Col>{item.title}</Col>
           <Col className="justify-content-center d-flex">{item.price}</Col>
           <Col className="justify-content-between d-flex">{item.quantity}
