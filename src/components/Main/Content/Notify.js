@@ -1,23 +1,28 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
-
-const Notify = ({show,setShow}) => {
+import { ToastContainer } from 'react-bootstrap';
+const Notify = ({show,setShow,item}) => {
   return (
     <Row>
       <Col xs={6}>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
+      <ToastContainer
+          className="p-3 position-fixed bottom-0 end-0"
+          
+          style={{ zIndex: 1 }}
+        >
+          <Toast  onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <Toast.Header closeButton={false}>
+              <img
+                src="holder.js/20x20?text=%20"
+                className="rounded me-2"
+                alt=""
+              />
+              <strong className="me-auto">Added</strong>
+            </Toast.Header>
+            <Toast.Body>You have add <b className='fst-italic'> {item} </b>to your cart</Toast.Body>
+          </Toast>
+        </ToastContainer>
       </Col>
     </Row>
   )

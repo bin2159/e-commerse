@@ -10,12 +10,14 @@ const Music = () => {
   const [toast,setToast]=useState(false)
   const musicCtx = useContext(MusicContext);
   const cartCtx=useContext(CartContext)
+  const [notifyItem,setNotifyItem] = useState('')
   const {
     musicProducts: { items },
   } = musicCtx;
   const {cartProducts:{addItem}}=cartCtx
   const cartHandler=(e)=>{
     addItem(e.target.id)
+    setNotifyItem(e.target.id)
     setToast(true)
   }
   return (
@@ -41,7 +43,7 @@ const Music = () => {
         ))}
       </Row>
     </Container>
-    <Notify show={toast} setShow={setToast}/>
+    <Notify show={toast} setShow={setToast} item={notifyItem}/> 
     </>
   );
 };

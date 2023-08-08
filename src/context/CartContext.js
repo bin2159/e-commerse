@@ -40,8 +40,9 @@ export const CartContextProvider = ({ children }) => {
             
         }
         else{
-        const newItem =musicItems.filter(items=>items.title=itemTitle)
-            const newItemList=[...prev,{...newItem,quantity:1}]
+        const newItem =musicItems.filter(items=>items.title===itemTitle)
+        newItem[0].quantity=1
+            const newItemList=[...prev,...newItem]
             return newItemList
         }
     })
