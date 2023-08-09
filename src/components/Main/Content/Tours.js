@@ -3,7 +3,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 const Tours = () => {
   return (
     <Container>
-      <h4 className="display-6 text-center fw-semibold">Music</h4>
+      <h4 className="display-6 text-center fw-semibold">Tours</h4>
       <Row className="mb-1 p-2 border-bottom">
         <Col>JUL16</Col>
         <Col>DETROIT, MI</Col>
