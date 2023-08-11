@@ -19,10 +19,11 @@ const MainNavigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            <NavLink className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to='./home'>Home</NavLink>
-            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="./store">Store</NavLink>
-            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="./about">About</NavLink>
-            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="./contact">Contact Us</NavLink>
+            <NavLink className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to=''>Home</NavLink>
+            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="store">Store</NavLink>
+            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="about">About</NavLink>
+            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="contact">Contact Us</NavLink>
+            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="login">Login</NavLink>
             <Cart setShow={showHandle} show={show}/>
           </Nav>
         </Navbar.Collapse>

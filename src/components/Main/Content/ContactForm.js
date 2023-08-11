@@ -31,8 +31,7 @@ const ContactForm = () => {
 
       <Container className="w-50">
         <Row>
-          <Col>
-            {" "}
+          <Col className="mt-4">
             <FloatingLabel
               label="Name"
               className="mb-3"
@@ -43,7 +42,6 @@ const ContactForm = () => {
         </Row>
         <Row>
           <Col>
-            {" "}
             <FloatingLabel
               label="Email address"
               className="mb-3"

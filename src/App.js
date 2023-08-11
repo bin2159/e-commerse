@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Store from "./pages/Store";
 import Error from "./pages/Error";
 import Contact from "./pages/Contact";
+import ProductDetails from "./pages/ProductDetails";
+import Login,{action as logicAction} from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -14,10 +16,18 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Error />,
     children: [
-      { path: "/home", element: <Home /> },
-      { path: "/store", element: <Store /> },
-      { path: "/about", element: <About /> },
-      {path:"/contact",element:<Contact/>}
+      { index:true, element: <Home/> },
+      {
+        path: "store",
+        children: [
+          {index:true,element:<Store/>},
+          { path: "product/:productId", element: <ProductDetails/> },
+        ],
+      },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "login", element: <Login /> ,action:logicAction},
+
     ],
   },
 ]);
