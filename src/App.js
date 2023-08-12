@@ -9,6 +9,7 @@ import Error from "./pages/Error";
 import Contact from "./pages/Contact";
 import ProductDetails from "./pages/ProductDetails";
 import Login,{action as logicAction} from "./pages/Login";
+import { checkAuthLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
@@ -20,11 +21,11 @@ const router = createBrowserRouter([
       {
         path: "store",
         children: [
-          {index:true,element:<Store/>},
+          {index:true,element:<Store/>,loader:checkAuthLoader,},
           { path: "product/:productId", element: <ProductDetails/> },
         ],
       },
-      { path: "about", element: <About /> },
+      { path: "about", element: <About />, },
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> ,action:logicAction},
 
