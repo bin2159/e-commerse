@@ -3,13 +3,21 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Cart from "../Cart/Cart";
-import { useState } from "react";
+import { useState,  useContext } from "react";
 import { NavLink } from "react-router-dom";
+import TokenContext from "../../context/TokenContext";
 const MainNavigation = () => {
     const [show,setshow]=useState(false)
   const showHandle=()=>{
     setshow(prev=>!prev)
   }
+  const tokenCtx=useContext(TokenContext)
+  const {token:{token}}=tokenCtx
+  // const [token,setToken]=useState(false)
+  // useEffect(()=>{
+  //   const token=localStorage.getItem('token')
+  //   setToken(!!token)
+  // },[])
   return (
     <Navbar expand="sm" className="bg-dark" variant="dark">
       <Container>
@@ -23,8 +31,8 @@ const MainNavigation = () => {
             <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="store">Store</NavLink>
             <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="about">About</NavLink>
             <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="contact">Contact Us</NavLink>
-            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to="login">Login</NavLink>
-            <Cart setShow={showHandle} show={show}/>
+            <NavLink  className='me-3' style={({isActive})=>isActive?{color:'white'}:{color:'gray'}} to={token?'login?mode=out':'login'}>{token?'Logout':'Login'}</NavLink>
+            {token&&<Cart setShow={showHandle} show={show}/>}
           </Nav>
         </Navbar.Collapse>
       </Container>

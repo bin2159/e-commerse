@@ -6,7 +6,7 @@ import CartContext from '../../context/CartContext';
 const Cart = ({ setShow,show }) => {
     const cartCtx=useContext(CartContext)
     const {cartProducts:{items}}=cartCtx
-    const totalItem=items.reduce((acc,curr)=>{return Number(curr.quantity)+acc},0)
+    const totalItem=items?items.reduce((acc,curr)=>{return Number(curr.quantity)+acc},0):''
   return (
     <>
       <Button variant="dark" className="position-relative" onClick={setShow}>

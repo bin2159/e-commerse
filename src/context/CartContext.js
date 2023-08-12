@@ -1,56 +1,77 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import MusicContext from "./MusicContext";
 
 const CartContext = createContext({});
 
 export const CartContextProvider = ({ children }) => {
-  const [item, setItem] = useState([
-    {id:'1',
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-      quantity: 2,
-    },
-    {id:'2',
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-      quantity: 3,
-    },
-    {id:'3',
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-      quantity: 1,
-    },
-  ]);
+  let email;
+  if (localStorage.getItem("email")) {
+    email = localStorage.getItem("email").replace(/@/g, "").replace(/\./g, "");
+  }
+
+  let itemarr=useRef
+  useEffect(()=>{
+    (async function () {
+      try {
+        const response = await fetch(
+          `https://auth-test-f913d-default-rtdb.firebaseio.com/cart${email}.json`
+        );
+        const data = await response.json();
+        itemarr.current = data[Object.keys(data).pop()];
+        setItem(itemarr.current)
+        
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  },[email,itemarr])
+
+  
+  const [item, setItem] = useState();
+  
   const musicCtx = useContext(MusicContext);
   const {
     musicProducts: { items: musicItems },
   } = musicCtx;
+
   const addItemHandler = (itemId) => {
     setItem((prev) => {
-      const duplicateItemIndex = prev.findIndex((prevItem) => prevItem.id === itemId);
-      console.log(duplicateItemIndex)
+      const duplicateItemIndex = prev.findIndex(
+        (prevItem) => prevItem.id === itemId
+      );
+      let newItemList;
       if (duplicateItemIndex !== -1) {
         const updatedItem = {
           ...prev[duplicateItemIndex],
           quantity: Number(prev[duplicateItemIndex].quantity) + 1,
         };
-        const newItemList = [...prev];
+        newItemList = [...prev];
         newItemList[duplicateItemIndex] = updatedItem;
-        return newItemList;
       } else {
         const newItem = musicItems.filter((items) => items.id === itemId);
         newItem[0].quantity = 1;
-        const newItemList = [...prev, ...newItem];
-        return newItemList;
+        newItemList = [...prev, ...newItem];
       }
+      (async function () {
+        try {
+          const response = await fetch(
+            `https://auth-test-f913d-default-rtdb.firebaseio.com/cart${email}.json`,
+            {
+              method: "POST",
+              body: JSON.stringify(newItemList),
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          console.log(response)
+        } catch (err) {
+          console.log(err);
+        }
+      })();
+
+      return newItemList;
     });
   };
+
   const cartProducts = {
     items: item,
     addItem: addItemHandler,

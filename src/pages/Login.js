@@ -1,4 +1,4 @@
-import { redirect } from "react-router-dom";
+
 import LoginForm from "../components/Main/Content/LoginForm";
 
 const Login = () => {
@@ -6,6 +6,17 @@ const Login = () => {
 };
 
 export default Login;
+
+export const loader=({request,params})=>{
+    const query=new URL(request.url).searchParams
+    const mode=query.get('mode')
+    if(mode==='out'){
+        localStorage.removeItem('email')
+        localStorage.removeItem('token')
+        return ('LOGOUT')
+    }
+    return ('LOGIN')
+}
 
 export const action = async ({ request, params }) => {
   const data = await request.formData();
@@ -29,7 +40,8 @@ export const action = async ({ request, params }) => {
     }
     const token = resData.idToken;
     localStorage.setItem("token", token);
-    return redirect('/store')
+    localStorage.setItem('email',userData.email)
+    return ('LOGIN')
   } catch (err) {
     console.log(err);
   }

@@ -12,3 +12,8 @@ export const checkAuthLoader=()=>{
      }
      return ('')
 }
+
+export const logoutLoader=()=>{
+    
+}
+

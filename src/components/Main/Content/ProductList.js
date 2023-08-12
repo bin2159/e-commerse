@@ -5,7 +5,7 @@ import MusicContext from "../../../context/MusicContext";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CartContext from "../../../context/CartContext";
-import { Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 const ProductList = ({setToast,setNotifyItem,product}) => {
   const musicCtx = useContext(MusicContext);
   const {
@@ -36,6 +36,7 @@ const ProductList = ({setToast,setNotifyItem,product}) => {
                 </div>
               </Card.Body>
               </Link>
+              
               <Button id={item.id} variant="dark" onClick={cartHandler}>Add to Cart</Button>
 
             </Card>
